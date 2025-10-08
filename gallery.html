@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - CENCE Uganda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a6b6b;
+            --secondary-color: #f8c146;
+            --light-color: #f8f9fa;
+            --dark-color: #333;
+            --text-color: #444;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+        }
+        
+        .navbar-brand img {
+            height: 80px;
+            width: auto;
+        }
+        
+        .nav-link {
+            color: var(--primary-color) !important;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.8rem 1rem !important;
+            position: relative;
+        }
+        
+        .nav-link:hover:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 1rem;
+            right: 1rem;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        .dropdown-item {
+            padding: 0.6rem 1.2rem;
+        }
+        
+        .dropdown-item:hover {
+            background-color: rgba(26, 107, 107, 0.1);
+        }
+        
+        /* Hero Section */
+        .gallery-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('tailor group.jpg') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .gallery-hero h1 {
+            font-size: 2.8rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .gallery-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Gallery Section */
+        .gallery-section {
+            padding: 40px 0;
+        }
+        
+        .section-heading {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        .section-heading:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .gallery-filters {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .filter-btn {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 20px;
+            margin: 5px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 280px;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 20px;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .gallery-title {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .gallery-caption {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        /* Modal Styles */
+        .modal-content {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .modal-header {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .modal-body {
+            padding: 0;
+        }
+        
+        .modal-img {
+            width: 100%;
+            border-radius: 0;
+        }
+        
+        .modal-caption {
+            padding: 15px 20px;
+            background: #f8f9fa;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+        
+        footer h2 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        footer h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+        
+        footer ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        footer ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        footer a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        footer a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            margin-top: 40px;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .gallery-hero {
+                padding: 80px 0 40px;
+            }
+            
+            .gallery-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+            
+            .gallery-item {
+                height: 220px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .gallery-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-btn {
+                padding: 6px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="C.logo.jpg" alt="CENCE Uganda Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active" href="about.html" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+                        <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                            <li><a class="dropdown-item" href="about.html">About</a></li>
+                            <li><a class="dropdown-item" href="staff.html">Staff</a></li>
+                            <li><a class="dropdown-item" href="contact us.html">Contact Us</a></li>
+                           <li><a class="dropdown-item" href="donation.html">Donation</a></li>                        
+                            <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="programs.html" id="programsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Our Programs</a>
+                        <ul class="dropdown-menu" aria-labelledby="programsDropdown">
+                            <li><a class="dropdown-item" href="programs.html">Programs</a></li>
+                          <li><a class="dropdown-item" href="programs.html">C-Hearts</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="news.html" id="newsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">News</a>
+                        <ul class="dropdown-menu" aria-labelledby="newsDropdown">
+                            <li><a class="dropdown-item" href="blog.html">Blog</a></li>
+                            <li><a class="dropdown-item" href="careers.html">Careers</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="partners.html" id="partnersDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Partners</a>
+                        <ul class="dropdown-menu" aria-labelledby="partnersDropdown">
+                            <li><a class="dropdown-item" href="our partners.html">Our Partners</a></li>
+                   
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gallery-hero">
+        <div class="container">
+            <h1>Our Gallery</h1>
+            <p>Witness the transformative impact of our youth skilling programs through these moments captured in action.</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <h2 class="section-heading">Program Highlights</h2>
+            
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="training">Training</button>
+                <button class="filter-btn" data-filter="graduation">Graduation</button>
+                <button class="filter-btn" data-filter="community">Community</button>
+                <button class="filter-btn" data-filter="success">Success Stories</button>
+            </div>
+            
+            <div class="gallery-container">
+                <!-- Training Images -->
+                <div class="gallery-item" data-category="training">
+                    <img src="carpenter chair.jpg" alt="Youth in carpentry workshop" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Carpentry Training</div>
+                        <p class="gallery-caption">Youth learning practical carpentry skills in our workshop</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="training">
+                    <img src="tailor1.jpg" alt="Tailoring training session" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Tailoring Program</div>
+                        <p class="gallery-caption">Students practicing garment construction techniques</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="training">
+                    <img src="capenter bed.jpg" alt="Furniture making training" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Furniture Making</div>
+                        <p class="gallery-caption">Crafting quality furniture pieces in our vocational program</p>
+                    </div>
+                </div>
+                
+                <!-- Graduation Images -->
+                <div class="gallery-item" data-category="graduation">
+                    <img src="cert.jpg" alt="Graduation ceremony 2025" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Graduation Day 2025</div>
+                        <p class="gallery-caption">Celebrating the achievements of our skilled graduates</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="graduation">
+                    <img src="6.jpg" alt="Certificate awarding" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Certificate Ceremony</div>
+                        <p class="gallery-caption">Recognizing the hard work and dedication of our students</p>
+                    </div>
+                </div>
+                
+                <!-- Community Images -->
+                <div class="gallery-item" data-category="community">
+                    <img src="7.jpg" alt="Community outreach in rural Uganda" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Rural Outreach</div>
+                        <p class="gallery-caption">Bringing skills training opportunities to rural communities</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="community">
+                    <img src="1757343782348.jpg" alt="Workshop building" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Workshop building</div>
+                        <p class="gallery-caption">Working hand-in-hand with local communities for sustainable development</p>
+                    </div>
+                </div>
+                
+                <!-- Success Stories -->
+                <div class="gallery-item" data-category="success">
+                    <img src="tailor group.jpg" alt="Successful tailoring business" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Entrepreneurial Success</div>
+                        <p class="gallery-caption">Graduates establishing their own tailoring businesses</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-category="success">
+                    <img src="Agric.jpg" alt="Agricultural photos" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Agricultural Innovation</div>
+                        <p class="gallery-caption">Youth applying modern farming techniques learned in our programs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-5 bg-light">
+        <div class="container text-center">
+            <h2 class="mb-4">Support Our Mission</h2>
+            <p class="lead mb-4">Help us empower more youth with practical skills for sustainable livelihoods</p>
+            <a href="donation.html" class="btn btn-primary btn-lg me-3">Make a Donation</a>
+            <a href="our partners.html" class="btn btn-outline-primary btn-lg">Become a Partner</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="Footer.jpg" alt="CENCE Uganda Logo" width="120" style="filter: brightness(0) invert(1);">
+                    </a>
+                    <p class="mt-3">Empowering youth with skills for sustainable livelihoods through mindset transformation and practical training.</p>
+                </div>
+                
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h2>Take Action</h2>
+                    <ul>
+                        <li><a href="donation.html">Donate</a></li>
+                        <li><a href="our partners.html">Partner With Us</a></li> 
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h2>Who We Are</h2>
+                    <ul>
+                        <li><a href="staff.html">Our Team</a></li>   
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="#">Board of Directors</a></li>
+                        <li><a href="#">Media</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3">
+                    <h2>Contact Us</h2>
+                    <p><a href="mailto:info@cenceuganda.ug"><i class="fas fa-envelope me-2"></i> info@cenceuganda.org</a></p>
+                    
+                    <div class="mt-3">
+                        <a href="https://x.com/cenceuganda" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/cenceuganda" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@cenceuganda" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="https://whatsapp.com/cenceuganda" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center copyright">
+                <p>&copy; 2025 CENCE Uganda. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="" alt="" class="modal-img" id="modalImage">
+                    <div class="modal-caption">
+                        <h5 id="modalTitle"></h5>
+                        <p id="modalCaption"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simple filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    galleryItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Modal functionality
+            const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalCaption = document.getElementById('modalCaption');
+            
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const imgSrc = this.querySelector('img').src;
+                    const title = this.querySelector('.gallery-title').textContent;
+                    const caption = this.querySelector('.gallery-caption').textContent;
+                    
+                    modalImage.src = imgSrc;
+                    modalTitle.textContent = title;
+                    modalCaption.textContent = caption;
+                    
+                    imageModal.show();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

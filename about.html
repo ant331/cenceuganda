@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - CENCE Uganda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #1a6b6b;
+            --secondary-color: #f8c146;
+            --light-color: #f8f9fa;
+            --dark-color: #333;
+            --text-color: #444;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+        }
+        
+        .navbar-brand img {
+            height: 80px;
+            width: auto;
+        }
+        
+        .nav-link {
+            color: var(--primary-color) !important;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.8rem 1rem !important;
+            position: relative;
+        }
+        
+        .nav-link:hover:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 1rem;
+            right: 1rem;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        .dropdown-item {
+            padding: 0.6rem 1.2rem;
+        }
+        
+        .dropdown-item:hover {
+            background-color: rgba(26, 107, 107, 0.1);
+        }
+        
+        /* About Hero Section */
+        .about-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('nature.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .about-hero h1 {
+            font-size: 2.8rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .about-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Content Sections */
+        .section-heading {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        .section-heading:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .mission-vision {
+            background-color: #f9f9f9;
+            padding: 60px 0;
+            border-radius: 10px;
+            margin: 40px 0;
+        }
+        
+        .mission-vision-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+        
+        .mission-vision-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .mission-vision-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .mission-vision-card h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .challenge-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .challenge-list li {
+            margin-bottom: 1rem;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .challenge-list li:before {
+            content: '•';
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+        
+        /* New Infographic Styles */
+        .infographic-section {
+            padding: 60px 0;
+        }
+        
+        .info-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            margin-bottom: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .info-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .info-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        
+        .objective-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .objective-list li {
+            margin-bottom: 1rem;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .objective-list li:before {
+            content: '✓';
+            color: var(--secondary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Progress Bars */
+        .progress-container {
+            margin-bottom: 20px;
+        }
+        
+        .progress-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+            background-color: #e9ecef;
+            overflow: visible;
+        }
+        
+        .progress-bar {
+            background-color: var(--primary-color);
+            border-radius: 5px;
+            position: relative;
+            transition: width 1.5s ease-in-out;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+        }
+        
+        /* Impact Stats */
+        .impact-stats {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0;
+            border-radius: 10px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+        }
+
+        /* SDG Section */
+        .sdg-card {
+            text-align: center;
+            padding: 20px 10px;
+            border-radius: 10px;
+            height: 100%;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+        }
+        
+        .sdg-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        
+        .sdg-icon-box {
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
+            border-radius: 8px;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0 auto 15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .sdg-title {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .sdg-1 { background-color: #E5243B; }
+        .sdg-2 { background-color: #DDA63A; }
+        .sdg-3 { background-color: #4C9F38; }
+        .sdg-4 { background-color: #C5192D; }
+        .sdg-8 { background-color: #A21942; }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        footer h2 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        footer h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+        
+        footer ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        footer ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        footer a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        footer a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            margin-top: 40px;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .about-hero {
+                padding: 80px 0 50px;
+            }
+            
+            .about-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .mission-vision-card {
+                margin-bottom: 20px;
+            }
+            
+            .chart-container {
+                height: 250px;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="C.logo.jpg" alt="CENCE Uganda Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active" href="about.html" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+                        <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                            <li><a class="dropdown-item" href="about.html">About</a></li>
+                            <li><a class="dropdown-item" href="staff.html">Staff</a></li>
+                            <li><a class="dropdown-item" href="contact us.html">Contact Us</a></li>
+                           <li><a class="dropdown-item" href="donation.html">Donation</a></li>                        
+                            <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="programs.html" id="programsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Our Programs</a>
+                        <ul class="dropdown-menu" aria-labelledby="programsDropdown">
+                            <li><a class="dropdown-item" href="programs.html">Programs</a></li>
+                            
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="news.html" id="newsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">News</a>
+                        <ul class="dropdown-menu" aria-labelledby="newsDropdown">
+                            <li><a class="dropdown-item" href="blog.html">Blog</a></li>
+                            <li><a class="dropdown-item" href="careers.html">Careers</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="partners.html" id="partnersDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Partners</a>
+                        <ul class="dropdown-menu" aria-labelledby="partnersDropdown">
+                            <li><a class="dropdown-item" href="our partners.html">Our Partners</a></li>
+                            
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="about-hero">
+        <div class="container">
+            <h1>About CENCE Uganda</h1>
+            <p>Empowering Ugandan youth with skills for sustainable livelihoods through mindset transformation and practical training.</p>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <h2 class="section-heading">Our Story</h2>
+                <p class="lead text-center mb-5">The Shift Within: A movement to awaken youth potential.</p>
+                
+                <p>After our studies, we felt lucky, not just proud. Going back home, we saw the reality many of our friends were facing. Bright, capable young people, stuck in a cycle of hopelessness, waiting for something to change. No jobs. No clear direction. No one to guide or invest in them. We realized that what separated us from them wasn't effort, it was opportunity.</p>
+                
+                <p>That hit hard. And it pushed us to act. We came together as a small team of young professionals with one question: What if we became the support we once wished for? That's how our youth empowerment initiative (CENCE) was born in 2025, right there in the midwestern Ugandan district of Kibaale.</p>
+                
+                <h3 class="mt-5 mb-4">Challenges We Address</h3>
+                <ul class="challenge-list">
+                    <li>High unemployment and limited job skills</li>
+                    <li>Youth waiting for jobs, support or rescue that may never come</li>
+                    <li>Loss of confidence in their ability to shape their future</li>
+                    <li>Few chances to start something of their own</li>
+                    <li>Mindset captivity - the belief that success can only come from outside help</li>
+                </ul>
+                
+                <p class="mt-4 fst-italic">Our goal is to help youth become self-reliant, and confident in building their futures, all through mindset change and any related support. This isn't just about jobs, it's about empowerment from the inside out.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="mission-vision">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <div class="mission-vision-card">
+                        <h3>Our Mission</h3>
+                        <p>To empower youth with the mindset, skills, and support networks needed to break free from self-doubt, create sustainable livelihoods, and build a brighter future for themselves and their communities.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mission-vision-card">
+                        <h3>Our Vision</h3>
+                        <p>A Community where every young person has the skills, confidence, and opportunities to thrive economically and contribute meaningfully to their communities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="infographic-section">
+        <div class="container">
+            <h2 class="section-heading">Our Commitment to SDGs</h2>
+            <p class="text-center mb-5">Our work directly contributes to several of the United Nations Sustainable Development Goals, creating a ripple effect of positive change.</p>
+            <div class="row justify-content-center">
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <div class="sdg-card">
+                        <div class="sdg-icon-box sdg-1">1</div>
+                        <h6 class="sdg-title">No Poverty</h6>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <div class="sdg-card">
+                        <div class="sdg-icon-box sdg-2">2</div>
+                        <h6 class="sdg-title">Zero Hunger</h6>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <div class="sdg-card">
+                        <div class="sdg-icon-box sdg-3">3</div>
+                        <h6 class="sdg-title">Good Health & Well-being</h6>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <div class="sdg-card">
+                        <div class="sdg-icon-box sdg-4">4</div>
+                        <h6 class="sdg-title">Quality Education</h6>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6 mb-4">
+                    <div class="sdg-card">
+                        <div class="sdg-icon-box sdg-8">8</div>
+                        <h6 class="sdg-title">Decent Work & Economic Growth</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="impact-stats">
+        <div class="container">
+            <h2 class="section-heading text-white">Our Impact</h2>
+            <div class="row mt-5">
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="1200">0</div>
+                        <div class="stat-label">Youth Trained</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="85">0</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="15">0</div>
+                        <div class="stat-label">Communities</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="300">0</div>
+                        <div class="stat-label">Businesses Started</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="infographic-section">
+        <div class="container">
+            <h2 class="section-heading">Program Progress</h2>
+            <p class="text-center mb-5">Our current initiatives and their implementation status</p>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="progress-container">
+                        <div class="progress-title">
+                            <span>Mindset Transformation Program</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-container">
+                        <div class="progress-title">
+                            <span>Vocational Skills Training</span>
+                            <span>55%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-container">
+                        <div class="progress-title">
+                            <span>Entrepreneurship Development</span>
+                            <span>65%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="chart-container">
+                        <canvas id="programChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="infographic-section bg-light">
+        <div class="container">
+            <h2 class="section-heading">How We Unlock The Giant Within</h2>
+            
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <div class="info-card">
+                        <div class="info-number">1</div>
+                        <h3>Awaken Power</h3>
+                        <p>Through immersive <strong>Mindset Labs</strong>, we help youth break free from the narrative of "I can't" and build unwavering self-belief.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-card">
+                        <div class="info-number">2</div>
+                        <h3>Build a Path</h3>
+                        <p>We combine <strong>practical skills training</strong> with micro-venture support and VSLA savings circles, enabling youth to earn from day one and grow sustainably.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-card">
+                        <div class="info-number">3</div>
+                        <h3>Join a Tribe</h3>
+                        <p>No one walks alone. We facilitate <strong>peer support circles</strong> that foster collaboration, accountability, and a powerful sense of community.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="infographic-section">
+        <div class="container">
+            <h2 class="section-heading">Youth Demographics We Serve</h2>
+            
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <canvas id="ageChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <canvas id="genderChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="infographic-section bg-light py-5">
+        <div class="container">
+            <h2 class="section-heading">Our Governance & Core Objectives</h2>
+            
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <p>Our constitution establishes a clear and accountable structure, with a Board of Directors providing strategic oversight. This framework ensures that all our efforts are aligned with our core mission of empowering youth and transforming communities.</p>
+                    
+                    <ul class="objective-list mt-4">
+                        <li>Provide Mindset Labs to foster self-belief</li>
+                        <li>Equip youth with skills for micro-ventures</li>
+                        <li>Facilitate peer support circles ("tribes")</li>
+                        <li>Promote financial literacy via VSLA circles</li>
+                        <li>Ensure effective data management and financial accountability</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <canvas id="governanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="Footer.jpg" alt="CENCE Uganda Logo" width="120" style="filter: brightness(0) invert(1);">
+                    </a>
+                </div>
+                
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h2>Take Action</h2>
+                    <ul>
+                        <li><a href="donation.html">Donate</a></li>
+                        <li><a href="our partners.html">Partner With Us</a></li> 
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h2>Who We Are</h2>
+                    <ul>
+                        <li><a href="staff.html">Our Team</a></li>   
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="#">Board of Directors</a></li>
+                        <li><a href="#">Media</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3">
+                    <h2>Contact Us</h2>
+                    <p><a href="mailto:info@cenceuganda.ug"><i class="fas fa-envelope me-2"></i> info@cenceuganda.org</a></p>
+                    
+                    <div class="mt-3">
+                        <a href="https://x.com/cenceuganda" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/cenceuganda" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@cenceuganda" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="https://whatsapp.com/cenceuganda" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center copyright">
+                <p>&copy; 2025 CENCE Uganda. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Animate statistics counters
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-count');
+                const count = +counter.innerText;
+                const increment = Math.ceil(target / speed);
+                
+                if (count < target) {
+                    counter.innerText = Math.min(count + increment, target);
+                    setTimeout(() => animateCounters(), 1);
+                }
+            });
+        }
+        
+        // Initialize charts when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            animateCounters();
+            
+            // Color palette matching CENCE Uganda's theme
+            const cencePalette = {
+                primary: '#1a6b6b', 
+                secondary: '#f8c146',
+                accent1: '#4db6ac', 
+                accent2: '#80cbc4', 
+                accent3: '#26a69a',
+                accent4: '#b2dfdb',
+                text: '#444'
+            };
+
+            // Program Progress Chart
+            const programCtx = document.getElementById('programChart').getContext('2d');
+            new Chart(programCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Completed', 'In Progress', 'Planning'],
+                    datasets: [{
+                        data: [45, 30, 25],
+                        backgroundColor: [
+                            cencePalette.primary,
+                            cencePalette.secondary,
+                            cencePalette.accent2
+                        ],
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    family: "'Open Sans', sans-serif"
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Age Distribution Chart
+            const ageCtx = document.getElementById('ageChart').getContext('2d');
+            new Chart(ageCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['18-24', '25-30', '31-35', '36+'],
+                    datasets: [{
+                        label: 'Youth by Age',
+                        data: [45, 30, 15, 10],
+                        backgroundColor: cencePalette.primary,
+                        borderColor: '#fff',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // Gender Distribution Chart
+            const genderCtx = document.getElementById('genderChart').getContext('2d');
+            new Chart(genderCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Female', 'Male'],
+                    datasets: [{
+                        data: [60, 40],
+                        backgroundColor: [
+                            cencePalette.secondary,
+                            cencePalette.primary
+                        ],
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    family: "'Open Sans', sans-serif"
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Governance Chart
+            const governanceCtx = document.getElementById('governanceChart').getContext('2d');
+            new Chart(governanceCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Strategic Planning', 'Policy Oversight', 'Financial Management', 'Program Implementation', 'Community Engagement'],
+                    datasets: [{
+                        label: 'Focus Areas',
+                        data: [30, 25, 20, 15, 10],
+                        backgroundColor: [
+                            cencePalette.primary,
+                            cencePalette.secondary,
+                            cencePalette.accent1,
+                            cencePalette.accent2,
+                            cencePalette.accent3
+                        ],
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    family: "'Open Sans', sans-serif"
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Animate progress bars
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>

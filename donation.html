@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Support CENCE Uganda's youth skilling programs with your donation.">
+    <title>Donate - CENCE Uganda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a6b6b;
+            --secondary-color: #f8c146;
+            --light-color: #f8f9fa;
+            --dark-color: #333;
+            --text-color: #444;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+        }
+        
+        .navbar-brand img {
+            height: 80px;
+            width: auto;
+        }
+        
+        .nav-link {
+            color: var(--primary-color) !important;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.8rem 1rem !important;
+            position: relative;
+        }
+        
+        .nav-link:hover:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 1rem;
+            right: 1rem;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        .dropdown-item {
+            padding: 0.6rem 1.2rem;
+        }
+        
+        .dropdown-item:hover {
+            background-color: rgba(26, 107, 107, 0.1);
+        }
+        
+        /* Hero Section */
+        .donation-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('capenter bed.jpg') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .donation-hero h1 {
+            font-size: 2.8rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .donation-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Impact Section */
+        .impact-section {
+            background-color: var(--light-color);
+            padding: 60px 0;
+        }
+        
+        .impact-card {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            height: 100%;
+            transition: transform 0.3s;
+        }
+        
+        .impact-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .impact-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        /* Donation Form */
+        .donation-section {
+            padding: 60px 0;
+        }
+        
+        .section-heading {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        .section-heading:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .donation-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .currency-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .currency-btn {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .currency-btn.active {
+            border-color: var(--primary-color);
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .amount-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        @media (min-width: 576px) {
+            .amount-options {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .amount-btn {
+            padding: 15px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .amount-btn.active {
+            border-color: var(--primary-color);
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .custom-amount {
+            margin-bottom: 20px;
+        }
+        
+        .frequency-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .frequency-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .frequency-btn.active {
+            border-color: var(--primary-color);
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .form-control {
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(26, 107, 107, 0.25);
+        }
+        
+        .btn-donate {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        
+        .btn-donate:hover {
+            background-color: #145555;
+            transform: translateY(-2px);
+        }
+        
+        .payment-method {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .payment-option {
+            margin-bottom: 15px;
+        }
+        
+        .payment-details {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .payment-details.active {
+            display: block;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        footer h2 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        footer h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+        
+        footer ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        footer ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        footer a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        footer a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            margin-top: 40px;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .donation-hero {
+                padding: 80px 0 40px;
+            }
+            
+            .donation-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .currency-options, .frequency-options {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="C.logo.jpg" alt="CENCE Uganda Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="about.html" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+                        <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                            <li><a class="dropdown-item" href="about.html">About</a></li>
+                            <li><a class="dropdown-item" href="staff.html">Staff</a></li>
+                            <li><a class="dropdown-item" href="contact us.html">Contact Us</a></li>
+                           <li><a class="dropdown-item" href="donation.html">Donation</a></li>                        
+                            <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="programs.html" id="programsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Our Programs</a>
+                        <ul class="dropdown-menu" aria-labelledby="programsDropdown">
+                            <li><a class="dropdown-item" href="programs.html">Programs</a></li>
+                            <li><a class="dropdown-item" href="programs.html">C-Hearts</a></li>                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="news.html" id="newsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">News</a>
+                        <ul class="dropdown-menu" aria-labelledby="newsDropdown">
+                            <li><a class="dropdown-item" href="blog.html">Blog</a></li>
+                            <li><a class="dropdown-item" href="careers.html">Careers</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="partners.html" id="partnersDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Partners</a>
+                        <ul class="dropdown-menu" aria-labelledby="partnersDropdown">
+                            <li><a class="dropdown-item" href="our partners.html">Our Partners</a></li>
+                           
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="donation-hero">
+        <div class="container">
+            <h1>Support Our Mission</h1>
+            <p>Your donation helps move youth out of unemployment and sets them on the path towards economic self-sufficiency.</p>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="impact-section">
+        <div class="container">
+            <h2 class="section-heading">Your Impact</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="impact-card">
+                        <div class="impact-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Vocational Training</h3>
+                        <p>$70 provides a youth with essential vocational training for 3 months</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="impact-card">
+                        <div class="impact-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3>Starter Kits</h3>
+                        <p>$150 provides a complete starter kit for a young entrepreneur</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="impact-card">
+                        <div class="impact-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Community Impact</h3>
+                        <p>$200 supports an entire community workshop for a month</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Form Section -->
+    <section class="donation-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="donation-card">
+                        <h2 class="section-heading">Make a Donation</h2>
+                        <p class="text-center mb-4">Through a one-time investment model, we partner with youth to create low-cost, livelihood-based development plans that create self-employment opportunities.</p>
+                        
+                        <form id="donation-form">
+                            <!-- Currency Selection -->
+                            <div class="currency-options">
+                                <button type="button" class="currency-btn active" data-currency="USD">USD ($)</button>
+                                <button type="button" class="currency-btn" data-currency="UGX">UGX (Sh)</button>
+                                <button type="button" class="currency-btn" data-currency="EUR">EUR (€)</button>
+                            </div>
+                            
+                            <!-- Amount Selection -->
+                            <h5>Select Amount</h5>
+                            <div class="amount-options">
+                                <button type="button" class="amount-btn" data-amount="70">$70</button>
+                                <button type="button" class="amount-btn" data-amount="100">$100</button>
+                                <button type="button" class="amount-btn" data-amount="150">$150</button>
+                                <button type="button" class="amount-btn" data-amount="200">$200</button>
+                            </div>
+                            
+                            <!-- Custom Amount -->
+                            <div class="custom-amount">
+                                <label for="custom-amount" class="form-label">Or enter custom amount</label>
+                                <input type="number" class="form-control" id="custom-amount" placeholder="Enter amount" min="1">
+                            </div>
+                            
+                            <!-- Frequency Selection -->
+                            <h5>Donation Frequency</h5>
+                            <div class="frequency-options">
+                                <button type="button" class="frequency-btn active" data-frequency="one-time">One Time</button>
+                                <button type="button" class="frequency-btn" data-frequency="monthly">Monthly</button>
+                            </div>
+                            
+                            <!-- Donor Information -->
+                            <h5>Your Information</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="First Name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Last Name" required>
+                                </div>
+                            </div>
+                            <input type="email" class="form-control" placeholder="Email Address" required>
+                            
+                            <!-- Payment Method -->
+                            <div class="payment-method">
+                                <h5>Payment Method</h5>
+                                <div class="payment-option">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="mobileMoney" value="mobileMoney" checked>
+                                        <label class="form-check-label" for="mobileMoney">
+                                            Mobile Money
+                                        </label>
+                                    </div>
+                                    <div class="payment-details active" id="mobileMoneyDetails">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input type="tel" class="form-control" placeholder="Phone Number" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select class="form-control" required>
+                                                    <option value="">Select Provider</option>
+                                                    <option value="mtn">MTN Mobile Money</option>
+                                                    <option value="airtel">Airtel Money</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="payment-option">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="bankCard" value="bankCard">
+                                        <label class="form-check-label" for="bankCard">
+                                            Bank Card
+                                        </label>
+                                    </div>
+                                    <div class="payment-details" id="bankCardDetails">
+                                        <input type="text" class="form-control" placeholder="Card Number" disabled>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" placeholder="MM/YY" disabled>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" placeholder="CVV" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="payment-option">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="bankTransfer" value="bankTransfer">
+                                        <label class="form-check-label" for="bankTransfer">
+                                            Bank Transfer
+                                        </label>
+                                    </div>
+                                    <div class="payment-details" id="bankTransferDetails">
+                                        <p class="small">Please use the following account details for bank transfers:</p>
+                                        <p><strong>Bank:</strong> Stanbic Bank Uganda<br>
+                                        <strong>Account Name:</strong> CENCE Uganda<br>
+                                        <strong>Account Number:</strong> 9030012345678<br>
+                                        <strong>Swift Code:</strong> SBICUGKX</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn-donate mt-4">Donate Now</button>
+                        </form>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <p>Your donation will help train youth in vital skills, create self-employment opportunities, and improve standards of living. <a href="contact us.html" class="text-primary">Contact us</a> for more information.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="Footer.jpg" alt="CENCE Uganda Logo" width="120" style="filter: brightness(0) invert(1);">
+                    </a>
+                    <p class="mt-3">Empowering youth with skills for sustainable livelihoods through mindset transformation and practical training.</p>
+                </div>
+                
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h2>Take Action</h2>
+                    <ul>
+                        <li><a href="donation.html">Donate</a></li>
+                        <li><a href="our partners.html">Partner With Us</a></li> 
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h2>Who We Are</h2>
+                    <ul>
+                        <li><a href="staff.html">Our Team</a></li>   
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="#">Board of Directors</a></li>
+                        <li><a href="#">Media</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3">
+                    <h2>Contact Us</h2>
+                    <p><a href="mailto:info@cenceuganda.ug"><i class="fas fa-envelope me-2"></i> info@cenceuganda.org</a></p>
+                    
+                    <div class="mt-3">
+                        <a href="https://x.com/cenceuganda" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/cenceuganda" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@cenceuganda" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="https://whatsapp.com/cenceuganda" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center copyright">
+                <p>&copy; 2025 CENCE Uganda. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Currency selection
+            const currencyButtons = document.querySelectorAll('.currency-btn');
+            currencyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    currencyButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Amount selection
+            const amountButtons = document.querySelectorAll('.amount-btn');
+            amountButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    amountButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    document.getElementById('custom-amount').value = '';
+                });
+            });
+            
+            // Frequency selection
+            const frequencyButtons = document.querySelectorAll('.frequency-btn');
+            frequencyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    frequencyButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Custom amount input clears preset amount selection
+            document.getElementById('custom-amount').addEventListener('focus', function() {
+                amountButtons.forEach(btn => btn.classList.remove('active'));
+            });
+            
+            // Payment method selection
+            const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
+            const paymentDetails = document.querySelectorAll('.payment-details');
+            
+            paymentMethods.forEach(method => {
+                method.addEventListener('change', function() {
+                    // Hide all payment details
+                    paymentDetails.forEach(detail => detail.classList.remove('active'));
+                    
+                    // Enable/disable inputs based on selection
+                    if (this.value === 'mobileMoney') {
+                        document.getElementById('mobileMoneyDetails').classList.add('active');
+                        document.querySelectorAll('#mobileMoneyDetails input, #mobileMoneyDetails select').forEach(input => {
+                            input.disabled = false;
+                            input.required = true;
+                        });
+                    } else if (this.value === 'bankCard') {
+                        document.getElementById('bankCardDetails').classList.add('active');
+                        document.querySelectorAll('#bankCardDetails input').forEach(input => {
+                            input.disabled = false;
+                            input.required = true;
+                        });
+                    } else if (this.value === 'bankTransfer') {
+                        document.getElementById('bankTransferDetails').classList.add('active');
+                    }
+                });
+            });
+            
+            // Form submission
+            document.getElementById('donation-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get selected amount
+                let amount = 0;
+                const activeAmount = document.querySelector('.amount-btn.active');
+                if (activeAmount) {
+                    amount = activeAmount.getAttribute('data-amount');
+                } else if (document.getElementById('custom-amount').value) {
+                    amount = document.getElementById('custom-amount').value;
+                }
+                
+                if (amount <= 0) {
+                    alert('Please select or enter a donation amount.');
+                    return;
+                }
+                
+                // Get frequency
+                const frequency = document.querySelector('.frequency-btn.active').getAttribute('data-frequency');
+                
+                // Get payment method
+                const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+                
+                // Show confirmation (in a real implementation, this would process the payment)
+                alert(`Thank you for your ${frequency} donation of $${amount}! Your support will help transform lives.`);
+            });
+        });
+    </script>
+</body>
+</html>

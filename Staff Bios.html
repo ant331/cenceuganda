@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional bios of CENCE Uganda's dedicated team members">
+    <title>Staff Bios - CENCE Uganda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a6b6b;
+            --secondary-color: #f8c146;
+            --light-color: #f8f9fa;
+            --dark-color: #333;
+            --text-color: #444;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+        }
+        
+        .navbar-brand img {
+            height: 80px;
+            width: auto;
+        }
+        
+        .nav-link {
+            color: var(--primary-color) !important;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.8rem 1rem !important;
+            position: relative;
+        }
+        
+        .nav-link:hover:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 1rem;
+            right: 1rem;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        .dropdown-item {
+            padding: 0.6rem 1.2rem;
+        }
+        
+        .dropdown-item:hover {
+            background-color: rgba(26, 107, 107, 0.1);
+        }
+        
+        /* Bio Hero Section */
+        .bio-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('tailor group.jpg') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .bio-hero h1 {
+            font-size: 2.8rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .bio-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Staff Bio Navigation */
+        .staff-nav {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .staff-nav h3 {
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .staff-nav h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .staff-nav .nav-pills .nav-link {
+            color: var(--text-color) !important;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .staff-nav .nav-pills .nav-link.active {
+            background-color: var(--primary-color);
+            color: white !important;
+        }
+        
+        .staff-nav .nav-pills .nav-link:hover:not(.active) {
+            background-color: rgba(26, 107, 107, 0.1);
+        }
+        
+        .staff-nav .nav-pills .nav-link i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+        
+        /* Bio Content */
+        .bio-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+            display: none;
+        }
+        
+        .bio-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .bio-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        
+        .bio-img-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            margin-bottom: 25px;
+            height: 350px;
+        }
+        
+        .bio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .bio-img:hover {
+            transform: scale(1.03);
+        }
+        
+        .bio-content h3 {
+            color: var(--primary-color);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .bio-content h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .skills-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .skills-list li {
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .skills-list li:before {
+            content: '•';
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+        
+        .btn-back {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.8rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        
+        .btn-back:hover {
+            background-color: #145555;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+        
+        footer h2 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        footer h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+        
+        footer ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        footer ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        footer a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        footer a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            margin-top: 40px;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .bio-hero {
+                padding: 80px 0 40px;
+            }
+            
+            .bio-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .bio-container {
+                padding: 25px;
+            }
+            
+            .bio-img-container {
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="C.logo.jpg" alt="CENCE Uganda Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active" href="about.html" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+                        <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                            <li><a class="dropdown-item" href="about.html">About</a></li>
+                            <li><a class="dropdown-item" href="staff.html">Staff</a></li>
+                            <li><a class="dropdown-item" href="contact us.html">Contact Us</a></li>
+                           <li><a class="dropdown-item" href="donation.html">Donation</a></li>                        
+                            <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="programs.html" id="programsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Our Programs</a>
+                        <ul class="dropdown-menu" aria-labelledby="programsDropdown">
+                            <li><a class="dropdown-item" href="programs.html">Programs</a></li>
+                            <li><a class="dropdown-item" href="vocational skilling.html">Vocational Skilling</a></li>
+                           <li><a class="dropdown-item" href="entrepreneurship.html">Entrepreneurship</a></li>
+                          
+                            <li><a class="dropdown-item" href="agriculture.html">Agriculture</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="news.html" id="newsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">News</a>
+                        <ul class="dropdown-menu" aria-labelledby="newsDropdown">
+                            <li><a class="dropdown-item" href="blog.html">Blog</a></li>
+                            <li><a class="dropdown-item" href="careers.html">Careers</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="partners.html" id="partnersDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Partners</a>
+                        <ul class="dropdown-menu" aria-labelledby="partnersDropdown">
+                            <li><a class="dropdown-item" href="our partners.html">Our Partners</a></li>
+                            
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Bio Hero Section -->
+    <section class="bio-hero">
+        <div class="container">
+            <h1>Our Professional Team</h1>
+            <p>Meet the dedicated professionals empowering Uganda's youth with skills for a brighter future.</p>
+        </div>
+    </section>
+
+    <!-- Staff Bio Navigation -->
+    <section class="container">
+        <div class="staff-nav">
+            <h3>Explore Our Team Members</h3>
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" data-bio="flevious">
+                        <i class="fas fa-user-tie"></i>Flevious Amanya
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bio="andrew">
+                        <i class="fas fa-database"></i>Andrew Amanya
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bio="shafic">
+                        <i class="fas fa-chart-line"></i>Kyobe Shafic
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bio="martin">
+                        <i class="fas fa-money-bill-wave"></i>Martin Tugume
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bio="gloria">
+                        <i class="fas fa-tasks"></i>Gloria Nakalema
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bio="lilian">
+                        <i class="fas fa-calculator"></i>Musiimenta Lilian
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bio="ronald">
+                        <i class="fas fa-file-alt"></i>Tumwekwasize Ronald
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bio="mourice">
+                        <i class="fas fa-hands-helping"></i>Murungi Mourice
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Bio Content Sections -->
+    <section class="container">
+        <!-- Flevious Amanya Bio -->
+        <div class="bio-container active" id="flevious-bio">
+            <div class="bio-header">
+                <h2>Flevious Amanya</h2>
+                <p class="lead">Project Coordinator - Back-End Software Engineering</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="bio-img-container">
+                        <img src="staff 1.jpg" alt="Flevious Amanya" class="bio-img">
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="bio-content">
+                        <p class="lead">Software engineering professional with expertise in developing scalable digital solutions for NGO operations and data management systems.</p>
+                        
+                        <p>Flevious brings technical excellence to CENCE Uganda's digital infrastructure, ensuring our programs have the technological foundation needed to scale effectively. His work enables efficient data flow and operational processes that support our mission of youth empowerment.</p>
+                        
+                        <h3>Core Competencies</h3>
+                        <ul class="skills-list">
+                            <li>Back-End Development & System Architecture</li>
+                            <li>Database Management & Optimization</li>
+                            <li>API Development & Integration</li>
+                            <li>System Security & Data Protection</li>
+                            <li>Software Development Lifecycle Management</li>
+                            <li>Technical Team Leadership</li>
+                        </ul>
+                        
+                        <h3>Professional Approach</h3>
+                        <p>Flevious combines technical expertise with a deep understanding of NGO operational needs, creating solutions that are both robust and practical for field implementation. His work ensures that CENCE Uganda's digital infrastructure supports rather than hinders our mission.</p>
+                        
+                        <a href="staff.html" class="btn btn-back"><i class="fas fa-arrow-left me-2"></i>Back to Staff</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Andrew Amanya Bio -->
+        <div class="bio-container" id="andrew-bio">
+            <div class="bio-header">
+                <h2>Andrew Amanya</h2>
+                <p class="lead">Project Coordinator - Data Management and Integrity</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="bio-img-container">
+                        <img src="ante.jpg" alt="Andrew Amanya" class="bio-img">
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="bio-content">
+                        <p class="lead">Results-driven Statistician and Data Analyst with 3+ years of experience in data collection, automation, and rural development.</p>
+                        
+                        <p>Andrew ensures accurate, secure, and ethical handling of organizational data to support evidence-based decision-making. His expertise in leveraging Python, SQL, and BI tools transforms raw data into actionable insights that drive program effectiveness.</p>
+                        
+                        <h3>Core Competencies</h3>
+                        <ul class="skills-list">
+                            <li>Data Analysis & Statistical Modeling</li>
+                            <li>Python Programming & SQL Database Management</li>
+                            <li>Business Intelligence Tools & Data Visualization</li>
+                            <li>Field Operations Management</li>
+                            <li>Data Quality Assurance & Integrity</li>
+                            <li>Program Impact Evaluation</li>
+                            <li>Evidence-Based Decision Making</li>
+                        </ul>
+                        
+                        <h3>Professional Approach</h3>
+                        <p>Andrew brings methodological rigor to data management while maintaining a practical approach to solving complex challenges in rural development contexts. His work ensures that CENCE Uganda's initiatives are grounded in accurate, reliable data that demonstrates real impact.</p>
+                        
+                        <a href="staff.html" class="btn btn-back"><i class="fas fa-arrow-left me-2"></i>Back to Staff</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kyobe Shafic Bio -->
+        <div class="bio-container" id="shafic-bio">
+            <div class="bio-header">
+                <h2>Kyobe Shafic</h2>
+                <p class="lead">Field Liaison Officer & Data Analyst</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="bio-img-container">
+                        <img src="fik.jpg" alt="Kyobe Shafic" class="bio-img">
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="bio-content">
+                        <p class="lead">Field operations specialist with expertise in bridging field operations and headquarters by translating raw data into actionable insights.</p>
+                        
+                        <p>Shafic plays a critical role in ensuring that data collected from the field is accurately interpreted and utilized to improve program outcomes. His unique position allows him to understand both the practical challenges in implementation and the strategic needs of the organization.</p>
+                        
+                        <h3>Core Competencies</h3>
+                        <ul class="skills-list">
+                            <li>Field Data Collection & Management</li>
+                            <li>Stakeholder Engagement & Communication</li>
+                            <li>Data Analysis & Interpretation</li>
+                            <li>Program Monitoring & Evaluation</li>
+                            <li>Report Generation & Presentation</li>
+                            <li>Cross-Departmental Coordination</li>
+                        </ul>
+                        
+                        <h3>Professional Approach</h3>
+                        <p>Shafic combines strong analytical skills with deep field experience, ensuring that data tells the complete story of our impact. His work closes the loop between program implementation and strategic decision-making.</p>
+                        
+                        <a href="staff.html" class="btn btn-back"><i class="fas fa-arrow-left me-2"></i>Back to Staff</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Martin Tugume Bio -->
+        <div class="bio-container" id="martin-bio">
+            <div class="bio-header">
+                <h2>Martin Tugume</h2>
+                <p class="lead">Project Coordinator - Budgeting & Donor Management</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="bio-img-container">
+                        <img src="mart.jpg" alt="Martin Tugume" class="bio-img">
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="bio-content">
+                        <p class="lead">Financial management professional specializing in maximizing resource efficiency and donor satisfaction through strategic financial planning.</p>
+                        
+                        <p>Martin ensures that CENCE Uganda's resources are allocated effectively to maximize impact while maintaining transparency and accountability to our donors. His work enables the organization to stretch every dollar further in service of our mission.</p>
+                        
+                        <h3>Core Competencies</h3>
+                        <ul class="skills-list">
+                            <li>Budget Development & Management</li>
+                            <li>Donor Relations & Reporting</li>
+                            <li>Financial Analysis & Projection</li>
+                            <li>Grant Management & Compliance</li>
+                            <li>Resource Optimization Strategies</li>
+                            <li>Financial Transparency Systems</li>
+                        </ul>
+                        
+                        <h3>Professional Approach</h3>
+                        <p>Martin approaches financial management as a strategic function rather than just an administrative one. His work ensures that financial decisions align with program priorities and organizational values.</p>
+                        
+                        <a href="staff.html" class="btn btn-back"><i class="fas fa-arrow-left me-2"></i>Back to Staff</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gloria Nakalema Bio -->
+        <div class="bio-container" id="gloria-bio">
+            <div class="bio-header">
+                <h2>Gloria Nakalema</h2>
+                <p class="lead">Project Coordinator - Implementation</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="bio-img-container">
+                        <img src="glo.jpg" alt="Gloria Nakalema" class="bio-img">
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="bio-content">
+                        <p class="lead">Implementation specialist with expertise in overseeing on-ground execution of programs and ensuring alignment with organizational objectives.</p>
+                        
+                        <p>Gloria transforms strategic plans into actionable programs that directly benefit Ugandan youth. Her hands-on approach ensures that CENCE Uganda's initiatives are implemented effectively and efficiently at the community level.</p>
+                        
+                        <h3>Core Competencies</h3>
+                        <ul class="skills-list">
+                            <li>Program Implementation & Management</li>
+                            <li>Community Engagement & Mobilization</li>
+                            <li>Logistics & Operations Coordination</li>
+                            <li>Performance Monitoring & Quality Assurance</li>
+                            <li>Stakeholder Relationship Management</li>
+                            <li>Problem-Solving & Adaptability</li>
+                        </ul>
+                        
+                        <h3>Professional Approach</h3>
+                        <p>Gloria believes that successful implementation requires both meticulous planning and the flexibility to adapt to changing circumstances. Her work ensures that CENCE Uganda's programs remain responsive to community needs while staying true to our mission.</p>
+                        
+                        <a href="staff.html" class="btn btn-back"><i class="fas fa-arrow-left me-2"></i>Back to Staff</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Musiimenta Lilian Bio -->
+        <div class="bio-container" id="lilian-bio">
+            <div class="bio-header">
+                <h2>Musiimenta Lilian</h2>
+                <p class="lead">Finance Officer</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="bio-img-container">
+                        <img src="lil.jpg" alt="Musiimenta Lilian" class="bio-img">
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="bio-content">
+                        <p class="lead">Finance professional ensuring transparent financial management and fiscal accountability to support community-driven programs.</p>
+                        
+                        <p>Lilian maintains the financial health of CENCE Uganda through careful management of resources, accurate reporting, and strict adherence to financial regulations. Her work provides the financial stability necessary for long-term program sustainability.</p>
+                        
+                        <h3>Core Competencies</h3>
+                        <ul class="skills-list">
+                            <li>Financial Management & Accounting</li>
+                            <li>Budget Tracking & Expenditure Control</li>
+                            <li>Financial Reporting & Compliance</li>
+                            <li>Audit Preparation & Management</li>
+                            <li>Cash Flow Management</li>
+                            <li>Financial Systems Development</li>
+                        </ul>
+                        
+                        <h3>Professional Approach</h3>
+                        <p>Lilian approaches financial management with both precision and integrity, understanding that financial transparency is essential to maintaining donor trust and organizational credibility.</p>
+                        
+                        <a href="staff.html" class="btn btn-back"><i class="fas fa-arrow-left me-2"></i>Back to Staff</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tumwekwasize Ronald Bio -->
+        <div class="bio-container" id="ronald-bio">
+            <div class="bio-header">
+                <h2>Tumwekwasize Ronald</h2>
+                <p class="lead">Proposal Officer & Data Analyst</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="bio-img-container">
+                        <img src="ronald.jpg" alt="Tumwekwasize Ronald" class="bio-img">
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="bio-content">
+                        <p class="lead">Proposal development expert who secures funding by crafting data-driven proposals and demonstrating program impact.</p>
+                        
+                        <p>Ronald combines analytical skills with persuasive writing to create compelling funding proposals that highlight CENCE Uganda's impact and potential. His work ensures that the organization has the resources needed to expand its programs.</p>
+                        
+                        <h3>Core Competencies</h3>
+                        <ul class="skills-list">
+                            <li>Proposal Writing & Development</li>
+                            <li>Grant Research & Identification</li>
+                            <li>Data Analysis for Funding Applications</li>
+                            <li>Donor Communication & Relationship Building</li>
+                            <li>Impact Measurement & Reporting</li>
+                            <li>Program Design & Theory of Change Development</li>
+                        </ul>
+                        
+                        <h3>Professional Approach</h3>
+                        <p>Ronald believes that successful proposals are built on a foundation of solid data and compelling storytelling. His work connects CENCE Uganda's mission with donor priorities to create mutually beneficial partnerships.</p>
+                        
+                        <a href="staff.html" class="btn btn-back"><i class="fas fa-arrow-left me-2"></i>Back to Staff</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Murungi Mourice Bio -->
+        <div class="bio-container" id="mourice-bio">
+            <div class="bio-header">
+                <h2>Murungi Mourice</h2>
+                <p class="lead">Outreach Coordinator</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="bio-img-container">
+                        <img src="mori.jpg" alt="Murungi Mourice" class="bio-img">
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="bio-content">
+                        <p class="lead">Community engagement specialist focused on connecting with rural youth and building partnerships for skilling initiatives.</p>
+                        
+                        <p>Mourice serves as the bridge between CENCE Uganda and the communities we serve, ensuring that our programs remain relevant and accessible to those who need them most. His work expands our reach and deepens our impact.</p>
+                        
+                        <h3>Core Competencies</h3>
+                        <ul class="skills-list">
+                            <li>Community Outreach & Engagement</li>
+                            <li>Partnership Development & Management</li>
+                            <li>Youth Mobilization & Empowerment</li>
+                            <li>Communication & Interpersonal Skills</li>
+                            <li>Program Awareness & Promotion</li>
+                            <li>Cultural Sensitivity & Adaptability</li>
+                        </ul>
+                        
+                        <h3>Professional Approach</h3>
+                        <p>Mourice believes that sustainable development begins with authentic community relationships. His work ensures that CENCE Uganda's programs are co-created with communities rather than imposed upon them.</p>
+                        
+                        <a href="staff.html" class="btn btn-back"><i class="fas fa-arrow-left me-2"></i>Back to Staff</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="Footer.jpg" alt="CENCE Uganda Logo" width="120" style="filter: brightness(0) invert(1);">
+                    </a>
+                </div>
+                
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h2>Take Action</h2>
+                    <ul>
+                        <li><a href="donation.html">Donate</a></li>
+                        <li><a href="our partners.html">Partner With Us</a></li> 
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h2>Who We Are</h2>
+                    <ul>
+                        <li><a href="staff.html">Our Team</a></li>   
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="#">Board of Directors</a></li>
+                        <li><a href="#">Media</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3">
+                    <h2>Contact Us</h2>
+                    <p><a href="mailto:info@cenceuganda.ug"><i class="fas fa-envelope me-2"></i> info@cenceuganda.org</a></p>
+                    
+                    <div class="mt-3">
+                        <a href="https://x.com/cenceuganda" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/cenceuganda" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@cenceuganda" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="https://whatsapp.com/cenceuganda" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center copyright">
+                <p>&copy; 2025 CENCE Uganda. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all nav links and bio containers
+            const navLinks = document.querySelectorAll('.staff-nav .nav-link');
+            const bioContainers = document.querySelectorAll('.bio-container');
+            
+            // Add click event to each nav link
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Get the target bio ID
+                    const bioId = this.getAttribute('data-bio');
+                    
+                    // Remove active class from all links and containers
+                    navLinks.forEach(item => item.classList.remove('active'));
+                    bioContainers.forEach(container => container.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Show the corresponding bio container
+                    document.getElementById(`${bioId}-bio`).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

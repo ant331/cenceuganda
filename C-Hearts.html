@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C-Hearts for Children - CENCE Uganda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #1a6b6b;
+            --secondary-color: #f8c146;
+            --accent-pink: #e83e8c;
+            --accent-blue: #20c997;
+            --accent-purple: #6f42c1;
+            --light-color: #f8f9fa;
+            --dark-color: #333;
+            --text-color: #444;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+        }
+        
+        .navbar-brand img {
+            height: 80px;
+            width: auto;
+        }
+        
+        .nav-link {
+            color: var(--primary-color) !important;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.8rem 1rem !important;
+            position: relative;
+        }
+        
+        .nav-link:hover:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 1rem;
+            right: 1rem;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        .dropdown-item {
+            padding: 0.6rem 1.2rem;
+        }
+        
+        .dropdown-item:hover {
+            background-color: rgba(26, 107, 107, 0.1);
+        }
+        
+        /* Hero Section */
+        .about-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('child.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .about-hero h1 {
+            font-size: 2.8rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .about-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Content Sections */
+        .section-heading {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        .section-heading:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-pink);
+        }
+        
+        .mission-vision {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 60px 0;
+            border-radius: 10px;
+            margin: 40px 0;
+        }
+        
+        .mission-vision-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--accent-blue);
+        }
+        
+        .mission-vision-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mission-vision-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .mission-vision-card h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent-blue);
+        }
+        
+        .challenge-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .challenge-list li {
+            margin-bottom: 1rem;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .challenge-list li:before {
+            content: '•';
+            color: var(--accent-pink);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+        
+        /* Infographic Styles */
+        .infographic-section {
+            padding: 60px 0;
+        }
+        
+        .info-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            margin-bottom: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--accent-purple);
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-pink);
+            margin-bottom: 1rem;
+        }
+        
+        .info-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        
+        .objective-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .objective-list li {
+            margin-bottom: 1rem;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .objective-list li:before {
+            content: '✓';
+            color: var(--accent-blue);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Progress Bars */
+        .progress-container {
+            margin-bottom: 20px;
+        }
+        
+        .progress-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+            background-color: #e9ecef;
+            overflow: visible;
+        }
+        
+        .progress-bar {
+            background-color: var(--accent-blue);
+            border-radius: 5px;
+            position: relative;
+            transition: width 1.5s ease-in-out;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent-pink);
+            border-radius: 50%;
+        }
+        
+        /* Impact Stats */
+        .impact-stats {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 60px 0;
+            border-radius: 10px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+        }
+        
+        /* How to Help */
+        .help-options {
+            padding: 60px 0;
+        }
+        
+        .help-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--accent-pink);
+        }
+        
+        .help-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .help-card i {
+            font-size: 3rem;
+            color: var(--accent-purple);
+            margin-bottom: 20px;
+        }
+        
+        .help-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        footer h2 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        footer h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+        
+        footer ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        footer ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        footer a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        footer a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            margin-top: 40px;
+        }
+        
+        /* Custom styles for C-Hearts page */
+        .story-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            border-left: 4px solid var(--accent-pink);
+        }
+        
+        .story-card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent-pink);
+            border-color: var(--accent-pink);
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 30px;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: white;
+        }
+        
+        /* Colorful elements */
+        .colorful-underline {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .colorful-underline:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-blue), var(--accent-purple));
+            border-radius: 2px;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .about-hero {
+                padding: 80px 0 50px;
+            }
+            
+            .about-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .mission-vision-card {
+                margin-bottom: 20px;
+            }
+            
+            .chart-container {
+                height: 250px;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="C.logo.jpg" alt="CENCE Uganda Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="about.html" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+                        <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                            <li><a class="dropdown-item" href="about.html">About</a></li>
+                            <li><a class="dropdown-item" href="staff.html">Staff</a></li>
+                            <li><a class="dropdown-item" href="contact us.html">Contact Us</a></li>
+                           <li><a class="dropdown-item" href="donation.html">Donation</a></li>                        
+                            <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active" href="programs.html" id="programsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Our Programs</a>
+                        <ul class="dropdown-menu" aria-labelledby="programsDropdown">
+                            <li><a class="dropdown-item" href="programs.html">Programs</a></li>
+                            <li><a class="dropdown-item" href="c-hearts.html">C-Hearts for Children</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="news.html" id="newsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">News</a>
+                        <ul class="dropdown-menu" aria-labelledby="newsDropdown">
+                            <li><a class="dropdown-item" href="blog.html">Blog</a></li>
+                            <li><a class="dropdown-item" href="careers.html">Careers</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="partners.html" id="partnersDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Partners</a>
+                        <ul class="dropdown-menu" aria-labelledby="partnersDropdown">
+                            <li><a class="dropdown-item" href="our partners.html">Our Partners</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <h1>C-Hearts for Children</h1>
+            <p>Ensuring every child in remote Uganda has access to quality education and the opportunity to build a brighter future.</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <h2 class="section-heading">Education for Every Child</h2>
+                <p class="lead text-center mb-5">Breaking barriers to education in remote communities across Uganda.</p>
+                
+                <p>In Uganda's most remote regions, thousands of children face significant barriers to accessing education. Distance, poverty, and lack of resources prevent many from ever setting foot in a classroom. C-Hearts for Children is our dedicated initiative to change this reality.</p>
+                
+                <p>We believe that every child deserves the opportunity to learn, grow, and build a better future through education. Our program focuses on removing the obstacles that keep children out of school and ensuring they have the support they need to succeed.</p>
+                
+                <h3 class="mt-5 mb-4">Challenges Facing Remote Children</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="challenge-list">
+                            <li>Long distances to the nearest school</li>
+                            <li>Lack of school supplies and uniforms</li>
+                            <li>Poverty forcing children to work instead of study</li>
+                            <li>Limited number of qualified teachers in remote areas</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="challenge-list">
+                            <li>Inadequate school infrastructure</li>
+                            <li>Cultural barriers & negative attitude towards education, especially for girls</li>
+                            <li>Hunger and malnutrition affecting learning ability</li>
+                            <li>Lack of early childhood education opportunities</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Statistics -->
+    <section class="impact-stats">
+        <div class="container">
+            <h2 class="section-heading text-white">Our Impact</h2>
+            <div class="row mt-5">
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="850">0</div>
+                        <div class="stat-label">Children Supported</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="12">0</div>
+                        <div class="stat-label">Schools Partnered</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="350">0</div>
+                        <div class="stat-label">Scholarships Awarded</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="95">0</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Approach Section -->
+    <section class="infographic-section">
+        <div class="container">
+            <h2 class="section-heading">Our Approach</h2>
+            
+            <div class="row mt-5">
+                <div class="col-md-4 mb-4">
+                    <div class="info-card">
+                        <div class="info-number">1</div>
+                        <h3>Transportation Support</h3>
+                        <p>We provide bicycles and establish safe walking groups to help children overcome distance barriers to education.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="info-card">
+                        <div class="info-number">2</div>
+                        <h3>Learning Materials</h3>
+                        <p>We supply textbooks, uniforms, and school supplies to ensure children have what they need to learn effectively.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="info-card">
+                        <div class="info-number">3</div>
+                        <h3>School Nutrition</h3>
+                        <p>We implement school feeding programs to combat hunger and improve concentration in the classroom.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="info-card">
+                        <div class="info-number">4</div>
+                        <h3>Teacher Support</h3>
+                        <p>We provide training and resources to teachers in remote schools to improve education quality.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="info-card">
+                        <div class="info-number">5</div>
+                        <h3>Community Engagement</h3>
+                        <p>We work with parents and community leaders to change attitudes about education, especially for girls.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="info-card">
+                        <div class="info-number">6</div>
+                        <h3>Scholarships</h3>
+                        <p>We provide scholarships for bright but disadvantaged students to continue their education beyond primary school.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Progress -->
+    <section class="infographic-section bg-light">
+        <div class="container">
+            <h2 class="section-heading">Program Progress</h2>
+            <p class="text-center mb-5">Our current initiatives and their implementation status</p>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="progress-container">
+                        <div class="progress-title">
+                            <span>School Supplies Program</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-container">
+                        <div class="progress-title">
+                            <span>Teacher Training</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-container">
+                        <div class="progress-title">
+                            <span>School Feeding Program</span>
+                            <span>60%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="chart-container">
+                        <canvas id="programChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Help -->
+    <section class="help-options">
+        <div class="container">
+            <h2 class="section-heading">How You Can Help</h2>
+            <div class="row mt-5">
+                <div class="col-md-4 mb-4">
+                    <div class="help-card">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <h3>Donate</h3>
+                        <p>Your financial support can provide scholarships, school supplies, and meals for children in remote areas.</p>
+                        <a href="donation.html" class="btn btn-primary mt-3">Donate Now</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="help-card">
+                        <i class="fas fa-hands-helping"></i>
+                        <h3>Volunteer</h3>
+                        <p>Share your skills by volunteering as a teacher, mentor, or helping with community outreach programs.</p>
+                        <a href="contact us.html" class="btn btn-primary mt-3">Volunteer</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="help-card">
+                        <i class="fas fa-bullhorn"></i>
+                        <h3>Spread the Word</h3>
+                        <p>Help us raise awareness about educational challenges in remote Uganda by sharing our mission with others.</p>
+                        <div class="mt-3">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="mission-vision">
+        <div class="container text-center">
+            <h2>Join Us in Making a Difference</h2>
+            <p class="lead mb-4">Together, we can ensure that every child in Uganda has access to quality education.</p>
+            <a href="contact us.html" class="btn btn-primary btn-lg">Get Involved Today</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="Footer.jpg" alt="CENCE Uganda Logo" width="120" style="filter: brightness(0) invert(1);">
+                    </a>
+                </div>
+                
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h2>Take Action</h2>
+                    <ul>
+                        <li><a href="donation.html">Donate</a></li>
+                        <li><a href="our partners.html">Partner With Us</a></li> 
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h2>Who We Are</h2>
+                    <ul>
+                        <li><a href="staff.html">Our Team</a></li>   
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="#">Board of Directors</a></li>
+                        <li><a href="#">Media</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3">
+                    <h2>Contact Us</h2>
+                    <p><a href="mailto:info@cenceuganda.ug"><i class="fas fa-envelope me-2"></i> info@cenceuganda.org</a></p>
+                    
+                    <div class="mt-3">
+                        <a href="https://x.com/cenceuganda" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/cenceuganda" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@cenceuganda" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="https://whatsapp.com/cenceuganda" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center copyright">
+                <p>&copy; 2025 CENCE Uganda. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Animate statistics counters
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-count');
+                const count = +counter.innerText;
+                const increment = Math.ceil(target / speed);
+                
+                if (count < target) {
+                    counter.innerText = Math.min(count + increment, target);
+                    setTimeout(() => animateCounters(), 1);
+                }
+            });
+        }
+        
+        // Initialize charts when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            animateCounters();
+            
+            // Color palette matching CENCE Uganda's theme with additional colors for C-Hearts
+            const cencePalette = {
+                primary: '#1a6b6b', 
+                secondary: '#f8c146',
+                accent1: '#e83e8c', // Pink
+                accent2: '#20c997', // Teal
+                accent3: '#6f42c1', // Purple
+                text: '#444'
+            };
+
+            // Program Progress Chart
+            const programCtx = document.getElementById('programChart').getContext('2d');
+            new Chart(programCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Completed', 'In Progress', 'Planning'],
+                    datasets: [{
+                        data: [50, 30, 20],
+                        backgroundColor: [
+                            cencePalette.accent2,
+                            cencePalette.accent1,
+                            cencePalette.accent3
+                        ],
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    family: "'Open Sans', sans-serif"
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Animate progress bars
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - CENCE Uganda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a6b6b;
+            --secondary-color: #4fc3f7;
+            --light-blue: #e1f5fe;
+            --light-color: #f8f9fa;
+            --dark-color: #333;
+            --text-color: #444;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+        }
+        
+        .navbar-brand img {
+            height: 80px;
+            width: auto;
+        }
+        
+        .nav-link {
+            color: var(--primary-color) !important;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.8rem 1rem !important;
+            position: relative;
+        }
+        
+        .nav-link:hover:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 1rem;
+            right: 1rem;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        .dropdown-item {
+            padding: 0.6rem 1.2rem;
+        }
+        
+        .dropdown-item:hover {
+            background-color: rgba(26, 107, 107, 0.1);
+        }
+        
+        /* Hero Section */
+        .blog-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('tailor group.jpg') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .blog-hero h1 {
+            font-size: 2.8rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Blog Section */
+        .blog-section {
+            padding: 40px 0;
+        }
+        
+        .section-heading {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        .section-heading:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            height: 100%;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .blog-img-container {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .blog-card .card-img-top {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .blog-card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+        
+        .blog-card .card-body {
+            padding: 25px;
+        }
+        
+        .blog-card .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary-color);
+        }
+        
+        .blog-card .card-text {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        .blog-meta i {
+            margin-right: 5px;
+            color: var(--secondary-color);
+        }
+        
+        .blog-meta div {
+            margin-right: 15px;
+        }
+        
+        .btn-read-more {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-read-more:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .sidebar h3 {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .sidebar h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .categories-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .categories-list li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .categories-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .categories-list a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .categories-list a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .categories-list span {
+            background-color: var(--light-blue);
+            color: var(--primary-color);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .recent-post {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .recent-post:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .recent-post-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .recent-post-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .recent-post-content h4 {
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+        
+        .recent-post-content p {
+            font-size: 0.8rem;
+            color: #777;
+            margin: 0;
+        }
+        
+        .tags-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tag {
+            background-color: var(--light-blue);
+            color: var(--primary-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            cursor: pointer;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            background: var(--light-blue);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .newsletter h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .newsletter p {
+            margin-bottom: 20px;
+        }
+        
+        .newsletter-form .form-control {
+            border: none;
+            border-radius: 50px;
+            padding: 12px 20px;
+            margin-bottom: 15px;
+        }
+        
+        .newsletter-form .btn-subscribe {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 25px;
+            width: 100%;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .newsletter-form .btn-subscribe:hover {
+            background-color: var(--primary-color);
+        }
+        
+        /* Pagination */
+        .pagination {
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .page-link {
+            color: var(--primary-color);
+            border: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+        }
+        
+        .page-link:hover {
+            background-color: var(--light-blue);
+            color: var(--primary-color);
+        }
+        
+        .page-item.active .page-link {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        
+        /* Search results message */
+        .search-results-message {
+            text-align: center;
+            margin: 20px 0;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+        
+        footer h2 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        footer h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+        
+        footer ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        footer ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        footer a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        footer a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            margin-top: 40px;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .blog-hero {
+                padding: 80px 0 40px;
+            }
+            
+            .blog-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .blog-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .blog-meta div {
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="C.logo.jpg" alt="CENCE Uganda Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="about.html" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+                        <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                            <li><a class="dropdown-item" href="about.html">About</a></li>
+                            <li><a class="dropdown-item" href="staff.html">Staff</a></li>
+                            <li><a class="dropdown-item" href="contact us.html">Contact Us</a></li>
+                           <li><a class="dropdown-item" href="donation.html">Donation</a></li>                        
+                            <li><a class="dropdown-item" href="gallery.html">Gallery</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="programs.html" id="programsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Our Programs</a>
+                        <ul class="dropdown-menu" aria-labelledby="programsDropdown">
+                            <li><a class="dropdown-item" href="programs.html">Programs</a></li>
+                          <li><a class="dropdown-item" href="programs.html">C-Hearts</a></li>                           </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active" href="news.html" id="newsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">News</a>
+                        <ul class="dropdown-menu" aria-labelledby="newsDropdown">
+                            <li><a class="dropdown-item" href="blog.html">Blog</a></li>
+                            <li><a class="dropdown-item" href="careers.html">Careers</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="partners.html" id="partnersDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Partners</a>
+                        <ul class="dropdown-menu" aria-labelledby="partnersDropdown">
+                            <li><a class="dropdown-item" href="our partners.html">Our Partners</a></li>
+                            
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="blog-hero">
+        <div class="container">
+            <h1>Blog & News</h1>
+            <p>Stay updated with our latest stories, insights, and impact on youth empowerment in Uganda.</p>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h2 class="section-heading">Latest Stories</h2>
+                    
+                    <!-- Search Results Message -->
+                    <div id="search-results-message" class="search-results-message" style="display: none;"></div>
+                    
+                    <div class="row" id="blog-posts-container">
+                        <!-- Blog Post 1 -->
+                        <div class="col-md-6 mb-4 blog-post">
+                            <div class="blog-card">
+                                <div class="blog-img-container">
+                                    <img src="tailor1.jpg" class="card-img-top" alt="Sarah's Journey to Tailoring">
+                                </div>
+                                <div class="card-body">
+                                    <div class="blog-meta">
+                                        <div><i class="far fa-calendar"></i> June 15, 2025</div>
+                                        <div><i class="far fa-user"></i> Admin</div>
+                                    </div>
+                                    <h5 class="card-title">Sarah's Journey to Tailoring Success</h5>
+                                    <p class="card-text">How CENCE Uganda helped Sarah become a skilled tailor and start her own business.</p>
+                                    <a href="#" class="btn btn-read-more">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Blog Post 2 -->
+                        <div class="col-md-6 mb-4 blog-post">
+                            <div class="blog-card">
+                                <div class="blog-img-container">
+                                    <img src="9.jpg" class="card-img-top" alt="Top Skills for Youth Employment">
+                                </div>
+                                <div class="card-body">
+                                    <div class="blog-meta">
+                                        <div><i class="far fa-calendar"></i> May 28, 2025</div>
+                                        <div><i class="far fa-user"></i> Admin</div>
+                                    </div>
+                                    <h5 class="card-title">Top 5 Skills for Youth Employment in Uganda</h5>
+                                    <p class="card-text">Discover the most in-demand skills that are helping Ugandan youth secure sustainable livelihoods.</p>
+                                    <a href="#" class="btn btn-read-more">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Blog Post 3 -->
+                        <div class="col-md-6 mb-4 blog-post">
+                            <div class="blog-card">
+                                <div class="blog-img-container">
+                                    <img src="capenter bed.jpg" class="card-img-top" alt="Carpentry Program Success">
+                                </div>
+                                <div class="card-body">
+                                    <div class="blog-meta">
+                                        <div><i class="far fa-calendar"></i> April 12, 2025</div>
+                                        <div><i class="far fa-user"></i> Admin</div>
+                                    </div>
+                                    <h5 class="card-title">Carpentry Program Graduates 25 Students</h5>
+                                    <p class="card-text">Our latest carpentry training program has successfully equipped 25 youth with valuable woodworking skills.</p>
+                                    <a href="#" class="btn btn-read-more">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Blog Post 4 -->
+                        <div class="col-md-6 mb-4 blog-post">
+                            <div class="blog-card">
+                                <div class="blog-img-container">
+                                    <img src="7.jpg" class="card-img-top" alt="Community Outreach">
+                                </div>
+                                <div class="card-body">
+                                    <div class="blog-meta">
+                                        <div><i class="far fa-calendar"></i> March 22, 2025</div>
+                                        <div><i class="far fa-user"></i> Admin</div>
+                                    </div>
+                                    <h5 class="card-title">Expanding Our Reach: New Community Partnerships</h5>
+                                    <p class="card-text">We're excited to announce new partnerships that will help us reach more youth in rural communities.</p>
+                                    <a href="#" class="btn btn-read-more">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <nav aria-label="Blog pagination">
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <!-- Search Widget -->
+                    <div class="sidebar">
+                        <h3>Search</h3>
+                        <div class="input-group">
+                            <input type="text" id="search-input" class="form-control" placeholder="Search articles...">
+                            <button id="search-button" class="btn btn-outline-secondary" type="button"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Categories Widget -->
+                    <div class="sidebar">
+                        <h3>Categories</h3>
+                        <ul class="categories-list">
+                            <li><a href="#">Success Stories <span>12</span></a></li>
+                            <li><a href="#">Vocational Training <span>8</span></a></li>
+                            <li><a href="#">Entrepreneurship <span>5</span></a></li>
+                            <li><a href="#">Agriculture <span>7</span></a></li>
+                            <li><a href="#">Community Outreach <span>9</span></a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Recent Posts Widget -->
+                    <div class="sidebar">
+                        <h3>Recent Posts</h3>
+                        <div class="recent-post">
+                            <div class="recent-post-img">
+                                <img src="tailor1.jpg" alt="Recent Post">
+                            </div>
+                            <div class="recent-post-content">
+                                <h4>Sarah's Journey to Tailoring Success</h4>
+                                <p><i class="far fa-calendar"></i> June 15, 2023</p>
+                            </div>
+                        </div>
+                        <div class="recent-post">
+                            <div class="recent-post-img">
+                                <img src="9.jpg" alt="Recent Post">
+                            </div>
+                            <div class="recent-post-content">
+                                <h4>Top Skills for Youth Employment</h4>
+                                <p><i class="far fa-calendar"></i> May 28, 2023</p>
+                            </div>
+                        </div>
+                        <div class="recent-post">
+                            <div class="recent-post-img">
+                                <img src="cert.jpg" alt="Recent Post">
+                            </div>
+                            <div class="recent-post-content">
+                                <h4>Graduation Ceremony 2023</h4>
+                                <p><i class="far fa-calendar"></i> April 30, 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tags Widget -->
+                    <div class="sidebar">
+                        <h3>Tags</h3>
+                        <div class="tags-cloud">
+                            <span class="tag">Youth</span>
+                            <span class="tag">Empowerment</span>
+                            <span class="tag">Training</span>
+                            <span class="tag">Skills</span>
+                            <span class="tag">Employment</span>
+                            <span class="tag">Entrepreneurship</span>
+                            <span class="tag">Agriculture</span>
+                            <span class="tag">Success</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Newsletter Widget -->
+                    <div class="sidebar newsletter">
+                        <h3>Subscribe to Newsletter</h3>
+                        <p>Stay updated with our latest news and stories.</p>
+                        <form class="newsletter-form">
+                            <input type="email" class="form-control" placeholder="Your email address" required>
+                            <button type="submit" class="btn btn-subscribe">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="Footer.jpg" alt="CENCE Uganda Logo" width="120" style="filter: brightness(0) invert(1);">
+                    </a>
+                    <p class="mt-3">Empowering youth with skills for sustainable livelihoods through mindset transformation and practical training.</p>
+                </div>
+                
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h2>Take Action</h2>
+                    <ul>
+                        <li><a href="donation.html">Donate</a></li>
+                        <li><a href="our partners.html">Partner With Us</a></li> 
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h2>Who We Are</h2>
+                    <ul>
+                        <li><a href="staff.html">Our Team</a></li>   
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="#">Board of Directors</a></li>
+                        <li><a href="#">Media</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3">
+                    <h2>Contact Us</h2>
+                    <p><a href="mailto:info@cenceuganda.ug"><i class="fas fa-envelope me-2"></i> info@cenceuganda.org</a></p>
+                    
+                    <div class="mt-3">
+                        <a href="https://x.com/cenceuganda" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/cenceuganda" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@cenceuganda" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="https://whatsapp.com/cenceuganda" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center copyright">
+                <p>&copy; 2025 CENCE Uganda. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-input');
+            const searchButton = document.getElementById('search-button');
+            const blogPosts = document.querySelectorAll('.blog-post');
+            const blogContainer = document.getElementById('blog-posts-container');
+            const resultsMessage = document.getElementById('search-results-message');
+            
+            // Function to perform search
+            function performSearch() {
+                const searchTerm = searchInput.value.trim().toLowerCase();
+                let resultsCount = 0;
+                
+                if (searchTerm === '') {
+                    // If search is empty, show all posts
+                    blogPosts.forEach(post => {
+                        post.style.display = 'block';
+                        resultsCount++;
+                    });
+                    resultsMessage.style.display = 'none';
+                } else {
+                    // Filter posts based on search term
+                    blogPosts.forEach(post => {
+                        const title = post.querySelector('.card-title').textContent.toLowerCase();
+                        const content = post.querySelector('.card-text').textContent.toLowerCase();
+                        
+                        if (title.includes(searchTerm) || content.includes(searchTerm)) {
+                            post.style.display = 'block';
+                            resultsCount++;
+                        } else {
+                            post.style.display = 'none';
+                        }
+                    });
+                    
+                    // Show results message
+                    if (resultsCount === 0) {
+                        resultsMessage.textContent = `No results found for "${searchTerm}"`;
+                        resultsMessage.style.display = 'block';
+                    } else {
+                        resultsMessage.textContent = `Found ${resultsCount} result(s) for "${searchTerm}"`;
+                        resultsMessage.style.display = 'block';
+                    }
+                }
+            }
+            
+            // Add event listeners
+            searchButton.addEventListener('click', performSearch);
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
